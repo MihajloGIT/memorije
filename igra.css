@@ -1,0 +1,62 @@
+.red{
+    text-align: center;
+}
+
+.kartica{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+}
+
+.kartica.done{
+    cursor: default;
+}
+
+.kartica.done:hover{
+    cursor: default;
+    box-shadow: none;
+}
+
+.kartica:hover{
+    border: 1px solid black;
+
+}
+
+
+
+.blue{
+    background-color: blue;
+}
+
+.pink{
+    background-color: pink;
+}
+
+.orange{
+    background-color: orange;
+}
+
+.green{
+    background-color: green;
+}
+
+.cyan{
+    background-color: cyan;
+}
+
+.teal{
+    background-color: teal;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.purple{
+    background-color: purple;
+}
+
+.color-hidden{
+    background-color: #eee;
+}
