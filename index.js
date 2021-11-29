@@ -8,6 +8,12 @@ app.get('/', function (req, res) {
 app.get('/igra', function (req, res) {
     res.sendFile("igra.html", { root: __dirname })
 })
+app.get('/onama', function (req, res) {
+    res.sendFile("onama.html", { root: __dirname })
+})
+app.get('/highscore', function (req, res) {
+    res.sendFile("highscore.html", { root: __dirname })
+})
 
 
 app.get('/post-zahtev', function (req, res) {
