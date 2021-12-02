@@ -1,33 +1,58 @@
+let clickedCard=null;
+let preventedClick=false;
+let combosFound=0;
 
-let clickedCard = null;
+const colors =[
+    'pink',
+    'yellow',
+    'red',
+    'cyan',
+    'blue',
+    'teal',
+    'orange',
+    'green'
+];
+
+const cards =[...document.querySelectorAll('.card')];
+for (let color of colors) {
+    cardAIndex = parseInt(Math.random() * cards.length);
+    const cardA=cards [cardAIndex];
+    cards.splice(cardAIndex, 1);
+    cardA.className += ' ${color}';
+    cardA.setAttribute(' data-color', color);
+
+    cardBIndex = parseInt(Math.random() * cards.length);
+    const cardB=cards [cardBIndex];
+    cards.splice(cardBIndex, 1);
+    cardB.className += ' ${color}';
+    cardA.setAttribute(' data-color', color);
+}
 
 function onCardClicked(e){
-    const target=e.currentTarget;
-    
-    if(
+    const target = e.currentTarget;
+
+    if (
+        preventedClick ||
         target === clickedCard ||
         target.className.includes('done')
     ) {
         return;
     }
 
-    target.className=target.className
-        .replace('color-hidden', '')
-        .trim();
-        target.className +=' done';
-        
-    
-    if(!clickedCard){
-//ako nismo kliknuli karticu, pratiti je, prikazati boju
+    target.className = target.className
+    .replace('color-hidden', '')
+    .trim();
+    target.className += ' done';
+
+    if(!clickedCard) {
         clickedCard=target;
-    } else if(clickedCard){
-//ako smo vec kliknuli karticu, proeriti da li se nova koju otvorimo poklapa sa starom
-        if(clickedCard.getAttribute('data-color') !== 
-        target.getAttribute('data-color'))
-        {
-            console.log('cards not equal');
+    } else if (clickedCard){
+        if(
+            clickedCard.getAttribute('data-color') !==
+            target.getAttribute('data-color')
+        ){
+            preventClick=true;
             setTimeout(() => {
-                console.log("we are here!");
                 clickedCard.className =
                 clickedCard.className.replace('done', '').trim() +
                 ' color-hidden';
@@ -35,9 +60,14 @@ function onCardClicked(e){
                 target.className.replace('done', '').trim() +
                 ' color-hidden';
                 clickedCard=null;
+                preventClick = false;
             }, 500);
-        }else{
-            clickedCard=null;
+        } else {
+            combosFound++;
+            clickedCard = null;
+            if(combosFound === 8) {
+                alert('YOU WIN');
+            }
         }
     }
 }
